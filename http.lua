@@ -178,8 +178,11 @@ function receivebody(self, headers, sink, step)
     if t and t ~= "identity" then mode = "http-chunked"
     elseif base.tonumber(headers["content-length"]) then mode = "by-length" end
 	base.print('mode', mode)
-    return self.try(ltn12.pump.all(socket.source(mode, self.c, length),
-        sink, step))
+    --return self.try(ltn12.pump.all(socket.source(mode, self.c, length),
+    --    sink, step))
+		
+	return ltn12.pump.all(socket.source(mode, self.c, length),
+        sink, step)
 end
 
 function metat.__index:receive09body(status, sink, step)
