@@ -169,7 +169,7 @@ function metat.__index:receivebody(headers, sink, step)
 end
 
 function receivebody(self, headers, sink, step)
-	base.print('receivebody')
+	--base.print('receivebody')
 	sink = sink or ltn12.sink.null()
     step = step or ltn12.pump.step
     local length = base.tonumber(headers["content-length"])
@@ -177,7 +177,7 @@ function receivebody(self, headers, sink, step)
     local mode = "default" -- connection close
     if t and t ~= "identity" then mode = "http-chunked"
     elseif base.tonumber(headers["content-length"]) then mode = "by-length" end
-	base.print('mode', mode)
+	--base.print('mode', mode)
     --return self.try(ltn12.pump.all(socket.source(mode, self.c, length),
     --    sink, step))
 		
